@@ -1,6 +1,6 @@
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
+import { resolveClaudeSettingsPath } from './configPaths.js';
 
 const CLAUDE_SKILLS_DIR = '/home/node/.claude/skills';
 const CLAUDE_AGENTS_DIR = '/home/node/.claude/agents';
@@ -143,7 +143,7 @@ function getVibeTaskAllowlist(): string[] {
 }
 
 function readClaudeSettings(claudeSettingsPath?: string): ClaudeSettings | null {
-  const settingsPath = claudeSettingsPath || path.join(os.homedir(), '.claude/settings.json');
+  const settingsPath = claudeSettingsPath || resolveClaudeSettingsPath();
   try {
     const raw = fs.readFileSync(settingsPath, 'utf8');
     const parsed = JSON.parse(raw) as ClaudeSettings;

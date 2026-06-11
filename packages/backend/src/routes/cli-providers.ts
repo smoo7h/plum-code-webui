@@ -18,6 +18,7 @@ import {
   type CLIProvider,
   type CLIProviderConfig,
 } from '../services/cli-providers.js';
+import { resolveClaudeSettingsPath } from '../utils/configPaths.js';
 import { AppError, asyncHandler } from '../middleware/errorHandler.js';
 import { rateLimiters } from '../middleware/rateLimiter.js';
 import { CLI_UPDATE_PROVIDERS, runCliUpdates } from '../services/cli-updates.js';
@@ -72,7 +73,7 @@ function countMcpServers(provider: CLIProvider): number {
       const raw = fs.readFileSync(configPath, 'utf-8');
       return (raw.match(/^\s*\[\[mcp_servers\]\]/gm) || []).length;
     }
-    const settingsPath = path.join(os.homedir(), '.claude', 'settings.json');
+    const settingsPath = resolveClaudeSettingsPath();
     const parsed = JSON.parse(fs.readFileSync(settingsPath, 'utf-8')) as { mcpServers?: unknown };
     return parsed.mcpServers && typeof parsed.mcpServers === 'object'
       ? Object.keys(parsed.mcpServers).length

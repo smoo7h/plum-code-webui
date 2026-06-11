@@ -54,10 +54,17 @@ interface ClaudeSettings {
 
 const PLAN_ALLOWED_TOOLS = new Set(['TodoWrite', 'ExitPlanMode']);
 
+// Mirrors the precedence chain in utils/configPaths.ts. This hook runs as a
+// standalone CLI script (spawned by Claude Code via tsx) and is deliberately
+// self-contained — it inherits the container env, so CLAUDE_CONFIG_DIR is set
+// at runtime and must win over the legacy plum overrides.
 function resolveConfigHome(): string {
-  const override = process.env.WEBUI_CONFIG_HOME || process.env.CLAUDE_CONFIG_HOME;
+  const override =
+    process.env.CLAUDE_CONFIG_DIR ||
+    process.env.WEBUI_CONFIG_HOME ||
+    process.env.CLAUDE_CONFIG_HOME;
   if (override && override.trim()) {
-    return override.trim();
+    return path.resolve(override.trim());
   }
   return path.join(os.homedir(), '.claude');
 }

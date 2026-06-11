@@ -2,13 +2,12 @@ import { Router } from 'express';
 import { nanoid } from 'nanoid';
 import { spawn } from 'child_process';
 import fs from 'fs';
-import os from 'os';
-import path from 'path';
 import { z } from 'zod';
 import { requireAuth, type AuthenticatedRequest } from '../middleware/auth';
 import { getDatabase } from '../db';
 import { AppError } from '../middleware/errorHandler';
 import { redactSensitiveText } from '../utils/sanitize';
+import { resolveClaudeSettingsPath } from '../utils/configPaths';
 import type { McpServer, McpServerType } from '@claude-code-webui/shared';
 
 const router = Router();
@@ -45,7 +44,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function getClaudeSettingsPath(): string {
-  return path.join(os.homedir(), '.claude', 'settings.json');
+  return resolveClaudeSettingsPath();
 }
 
 function getClaudeSettingsMcpId(name: string): string {

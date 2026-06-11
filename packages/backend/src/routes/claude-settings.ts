@@ -18,10 +18,10 @@ import { Router, Request, Response } from 'express';
 import { z } from 'zod';
 import fs from 'fs/promises';
 import path from 'path';
-import os from 'os';
 import { requireAuth, type AuthenticatedRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import { getDatabase } from '../db';
+import { resolveClaudeSettingsPath } from '../utils/configPaths';
 
 const router = Router();
 
@@ -78,7 +78,7 @@ async function writeSettingsFile(filePath: string, settings: ClaudeSettings): Pr
 
 // Get global settings file path
 function getGlobalSettingsPath(): string {
-  return path.join(os.homedir(), '.claude', 'settings.json');
+  return resolveClaudeSettingsPath();
 }
 
 // Get project settings file path

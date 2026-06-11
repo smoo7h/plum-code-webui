@@ -27,7 +27,7 @@ import {
 } from '../cli-providers.js';
 import type { CodexServiceTier, CodexWebSearchMode } from '@claude-code-webui/shared';
 import { opencodeServer, type OpencodeEvent } from '../opencode/OpencodeServer.js';
-import { resolveConfigHome } from '../../utils/configPaths.js';
+import { resolveConfigHome, resolveClaudeSettingsPath } from '../../utils/configPaths.js';
 import { syncExternalSkills } from '../../utils/skillSync.js';
 import { scanProject, formatProjectContext } from '../../utils/projectScanner.js';
 import { safeJsonParse } from '../../utils/json.js';
@@ -2171,11 +2171,12 @@ You are in Planning Mode. Do not execute tools other than TodoWrite or ExitPlanM
         args.push('--settings', hookSettings);
       }
 
-      // The CLI does NOT auto-load mcpServers from ~/.claude/settings.json —
+      // The CLI does NOT auto-load mcpServers from the global settings.json —
       // only claude.ai-managed MCPs and project-local .mcp.json get picked
       // up by default. Point it at our config so stdio servers (comfyui,
-      // android-builder, …) actually register on every spawn.
-      const mcpConfigPath = `${process.env.HOME || '/home/node'}/.claude/settings.json`;
+      // android-builder, …) actually register on every spawn. Honors
+      // CLAUDE_CONFIG_DIR so the sandbox's /data/settings.json is used.
+      const mcpConfigPath = resolveClaudeSettingsPath();
       try {
         if (fsSync.existsSync(mcpConfigPath)) {
           args.push('--mcp-config', mcpConfigPath);
