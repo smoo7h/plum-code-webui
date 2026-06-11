@@ -18,7 +18,7 @@ const router = Router();
 const createSessionSchema = z.object({
   name: z.string().min(1).max(100),
   workingDirectory: z.string().optional(), // Optional - will be auto-generated from name
-  cliProvider: z.enum(['claude', 'codex', 'opencode', 'vibe']).optional().default('codex'),
+  cliProvider: z.enum(['claude', 'codex', 'opencode', 'vibe']).optional().default('claude'),
 });
 
 const updateSessionSchema = z.object({
