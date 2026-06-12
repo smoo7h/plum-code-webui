@@ -8,7 +8,6 @@ import { useBasicAuthStore } from '@/stores/basicAuthStore';
 import { useAuthStore } from '@/stores/authStore';
 import { ProviderLogo } from '@/components/branding/ProviderLogo';
 import { UI_PROVIDER_META } from '@/lib/providers';
-import { PlumBackground } from '@/components/effects/PlumBackground';
 
 export function BasicLoginPage() {
   const navigate = useNavigate();
@@ -54,28 +53,24 @@ export function BasicLoginPage() {
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
-      {/* Plum frosted glass background with animated lights */}
-      <PlumBackground enableCursorGlow />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center gap-10 px-6 py-12 lg:grid lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6 text-center lg:text-left">
           <div className="flex items-center justify-center gap-3 lg:justify-start">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card/80 shadow-lg ring-1 ring-border/60 backdrop-blur-sm">
-              <img src="/logos/plum.png" alt="Plum Code WebUI" className="h-7 w-7 object-contain" />
+              <ProviderLogo provider="sevenwave" className="h-7 w-7" alt="Riptide" />
             </div>
             <div className="text-left">
               <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-                Plum Code WebUI
+                Riptide
               </p>
-              <p className="text-sm text-muted-foreground">
-                A violet command center for CLI coding
-              </p>
+              <p className="text-sm text-muted-foreground">AI workspace for CRM agent sessions</p>
             </div>
           </div>
 
           <div className="space-y-3">
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Orchestrate every CLI session from one plum-tinted cockpit.
+              Orchestrate every CLI session from one workspace.
             </h1>
             <p className="text-base text-muted-foreground">
               Manage sessions, switch providers, and keep context stitched together with a single
@@ -116,7 +111,7 @@ export function BasicLoginPage() {
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-semibold">Sign in</CardTitle>
             <CardDescription className="text-sm text-muted-foreground/80">
-              Use your Plum credentials to unlock the dashboard.
+              Use your Riptide credentials to unlock the dashboard.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-2">
