@@ -77,14 +77,14 @@ export function Layout() {
 
   useEffect(() => {
     document.title = activeSession
-      ? `${activeSession.name} · Plum Code`
-      : `${activeMeta.productName} WebUI`;
+      ? `${activeSession.name} · ${activeMeta.productName}`
+      : activeMeta.productName;
   }, [activeMeta.productName, activeSession]);
 
   return (
     <div className="relative flex h-screen bg-background">
       {/* Background effects */}
-      <AuroraBackground intensity={auroraIntensity} />
+      {uiProvider !== 'sevenwave' && <AuroraBackground intensity={auroraIntensity} />}
       <div className="absolute inset-0 pattern-bg pointer-events-none" />
 
       {/* Desktop Sidebar */}
