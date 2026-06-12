@@ -2136,8 +2136,6 @@ You are in Planning Mode. Do not execute tools other than TodoWrite or ExitPlanM
 
     if (cliProvider === 'claude') {
       // Build command args for stream-json mode (hooks-based permissions)
-      // IMPORTANT: Always use --dangerously-skip-permissions so our hook is the ONLY permission layer
-      // Without this, Claude's internal permission system would still prompt after our hook approves
       args = [
         '--print',
         '--verbose',
@@ -2148,8 +2146,25 @@ You are in Planning Mode. Do not execute tools other than TodoWrite or ExitPlanM
         '--input-format',
         'stream-json',
         '--include-partial-messages',
-        '--dangerously-skip-permissions',
       ];
+
+      // --dangerously-skip-permissions activates bypassPermissions mode, which on
+      // Claude Code >= 2.1.x ALSO disables PreToolUse-hook permission gating: a hook
+      // returning permissionDecision "deny" no longer blocks the call. So gate the
+      // flag by mode:
+      //   - auto-accept / danger: pass the flag. Hook-gating is moot here anyway —
+      //     auto-accept's hook approves everything; danger runs no hook at all — and
+      //     the flag suppresses Claude's internal prompts (none possible in print mode).
+      //   - manual / planning: DROP the flag so the PreToolUse hook actually fires and
+      //     its "deny" decision blocks the tool call. These modes exist precisely to
+      //     surface hook-mediated permission requests to the UI.
+      // Fail-closed note: with the flag dropped in print/stream-json mode, a hook
+      // "allow" bypasses Claude's internal permission evaluation, while a hook crash or
+      // missing decision falls through to Claude's permission system which, being
+      // non-interactive here, denies — i.e. fails closed rather than auto-running.
+      if (effectiveMode === 'auto-accept' || effectiveMode === 'danger') {
+        args.push('--dangerously-skip-permissions');
+      }
 
       if (selectedModel) {
         args.push('--model', selectedModel);
