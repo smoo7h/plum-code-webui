@@ -16,7 +16,7 @@ const cards = [
   { key: 'userCount', label: 'Total users', icon: Users, tone: 'text-sky-500' },
   { key: 'adminCount', label: 'Admins', icon: Shield, tone: 'text-amber-500' },
   { key: 'suspendedCount', label: 'Suspended', icon: UserX, tone: 'text-rose-500' },
-  { key: 'sessionCount', label: 'Sessions', icon: MessageSquare, tone: 'text-violet-500' },
+  { key: 'sessionCount', label: 'Sessions', icon: MessageSquare, tone: 'text-primary' },
   { key: 'runningSessionCount', label: 'Running now', icon: Activity, tone: 'text-emerald-500' },
   { key: 'auditCount', label: 'Audit entries', icon: FileText, tone: 'text-slate-400' },
 ] as const;
