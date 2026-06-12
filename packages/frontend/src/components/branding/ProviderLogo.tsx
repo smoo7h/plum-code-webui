@@ -8,6 +8,24 @@ type ProviderLogoProps = {
 };
 
 export function ProviderLogo({ provider, className, alt }: ProviderLogoProps) {
+  if (provider === 'sevenwave') {
+    const resolvedAlt = alt === undefined ? 'Riptide' : alt;
+    return (
+      <>
+        <img
+          src="/logos/7thwave.png"
+          alt={resolvedAlt}
+          className={cn('object-contain dark:hidden', className)}
+        />
+        <img
+          src="/logos/7thwave-white.png"
+          alt={resolvedAlt}
+          className={cn('hidden object-contain dark:block', className)}
+        />
+      </>
+    );
+  }
+
   if (provider === 'plum') {
     const resolvedAlt = alt === undefined ? 'Plum' : alt;
     return (

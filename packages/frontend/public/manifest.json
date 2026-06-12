@@ -1,25 +1,25 @@
 {
-  "name": "Plum Code WebUI",
-  "short_name": "Plum Code",
-  "description": "Web Interface for Plum Code",
+  "name": "Riptide",
+  "short_name": "Riptide",
+  "description": "Riptide workspace for CRM agent sessions.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/logos/plum.png",
+      "src": "/logos/7thwave-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/logos/plum.png",
+      "src": "/logos/7thwave.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
