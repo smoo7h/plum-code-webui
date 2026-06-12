@@ -221,7 +221,7 @@ function runMigrations(db: Database.Database): void {
 
   // Migration: Add cli_provider column to sessions table
   try {
-    db.exec(`ALTER TABLE sessions ADD COLUMN cli_provider TEXT DEFAULT 'codex'`);
+    db.exec(`ALTER TABLE sessions ADD COLUMN cli_provider TEXT DEFAULT 'claude'`);
   } catch {
     // Column already exists, ignore error
   }

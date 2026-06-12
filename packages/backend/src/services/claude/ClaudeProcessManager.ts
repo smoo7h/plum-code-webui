@@ -1852,8 +1852,8 @@ You are in Planning Mode. Do not execute tools other than TodoWrite or ExitPlanM
     // Use provided mode, or pending mode, or default to 'auto-accept'
     const effectiveMode = mode ?? this.pendingModes.get(sessionId) ?? 'auto-accept';
     this.pendingModes.delete(sessionId); // Clear pending mode once used
-    // Codex is the primary provider. Only very old rows can have NULL here.
-    const cliProvider: CLIProvider = session.cli_provider || 'codex';
+    // Claude is the primary provider for this fork. Only very old rows can have NULL here.
+    const cliProvider: CLIProvider = session.cli_provider || 'claude';
     const providerConfig = CLI_PROVIDERS[cliProvider];
     const configHome = resolveConfigHome(cliProvider);
     const selectedModel = await getCliModelForUser(userId, cliProvider);
@@ -5287,7 +5287,7 @@ ${proc.contextReminder.summary}
     const sessionRow = db
       .prepare('SELECT cli_provider as cliProvider FROM sessions WHERE id = ? AND user_id = ?')
       .get(sessionId, userId) as { cliProvider: CLIProvider | null } | undefined;
-    const nextProvider = sessionRow?.cliProvider || proc?.cliProvider || 'codex';
+    const nextProvider = sessionRow?.cliProvider || proc?.cliProvider || 'claude';
     const providerChanged = !!proc && nextProvider !== proc.cliProvider;
 
     if (providerChanged) {

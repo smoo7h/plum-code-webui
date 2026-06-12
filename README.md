@@ -267,7 +267,7 @@ Full schema in `packages/backend/src/config.ts` (zod-validated, fails fast on st
 The backend spawns each provider as a child process and bridges its stream over Socket.IO:
 
 ```bash
-# Codex - default, single-shot per turn; WebUI respawns after turn.completed
+# Codex - single-shot per turn; WebUI respawns after turn.completed
 codex exec --json --skip-git-repo-check --cd /workspace/my-project ...
 
 # OpenCode - server-backed model routing for GLM, Kimi, Anthropic, OpenAI, etc.

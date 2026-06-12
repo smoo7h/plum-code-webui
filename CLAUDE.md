@@ -202,19 +202,19 @@ A second MCP server, **android-builder**, lets every webui session (Codex / Open
 
 Four CLI backends are wired into `ClaudeProcessManager` (insertion order in `CLI_PROVIDERS` dictates UI list order):
 
-- **Codex** (`codex`) — **default / primary**. Per-turn process model; the manager detects `turn.completed` and respawns on the next input. Streaming and resume are simulated:
+- **Codex** (`codex`) — per-turn process model; the manager detects `turn.completed` and respawns on the next input. Streaming and resume are simulated:
   - **Streaming**: `translateCodexMessage` handles `item.delta` / `agent_message.delta` / `text.delta` / `response.output_text.delta` events from `codex exec --json` (Codex 0.130+) and forwards each chunk as a `session:output` delta. Falls back gracefully to whole-message emit on `item.completed` if no deltas arrive.
   - **Resume**: `buildCodexContextPrefix()` reads the last 40 messages (≤24k chars) from SQLite and prepends them as a `[Prior conversation context]` block to stdin on each respawn — codex CLI has no native `--resume` flag.
 - **OpenCode** (`opencode`) — server-backed (HTTP/SSE), full stream-json, native resume via `--session`. Routes 75+ LLMs (GLM `z-ai/glm-*`, Kimi, etc.).
 - **Mistral Vibe** (`vibe`) — argv-based prompt (`-p TEXT`), per-turn spawn; isolated `VIBE_HOME=~/.vibe/webui-sessions/{sessionId}` per WebUI session; `--continue` flag for resume.
-- **Claude Code** (`claude`) — legacy. Persistent stream-json process. Still works but no longer surfaced as default.
+- **Claude Code** (`claude`) — **default / primary** for this fork. Persistent stream-json process.
 
 Provider config homes (persisted via compose volumes): `~/.codex`, `~/.local/share/opencode`, `~/.vibe`, `~/.claude`. See `AGENTS.md` for the broader multi-provider workflow and skill-pack sync conventions.
 
 **Default provider selection**:
 
-- Backend: `routes/sessions.ts` schema defaults `cliProvider` to `'codex'`; `db/index.ts` migration default for `sessions.cli_provider` column is `'codex'`.
-- Frontend: `packages/frontend/src/lib/providers.ts` maps the neutral `plum` UI brand to CLI `codex` (was `claude`).
+- Backend: `routes/sessions.ts` schema defaults `cliProvider` to `'claude'`; `routes/settings.ts` `parseCliProvider()` and the `db/index.ts` migration default for `sessions.cli_provider`, plus the legacy-row fallbacks in `ClaudeProcessManager`, all default to `'claude'`.
+- Frontend: `packages/frontend/src/lib/providers.ts` maps the neutral `plum` UI brand to CLI `claude`.
 - Custom agents (`custom_agents.model` default in SQL) and `/model`-command fallback both use `gpt-5.5`.
 
 ## Pitfalls

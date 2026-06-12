@@ -129,7 +129,7 @@ const CLI_TO_UI: Record<CLIProvider, UiProvider> = {
 };
 
 const UI_TO_CLI: Record<UiProvider, CLIProvider> = {
-  plum: 'codex',
+  plum: 'claude',
   claude: 'claude',
   codex: 'codex',
   opencode: 'opencode',

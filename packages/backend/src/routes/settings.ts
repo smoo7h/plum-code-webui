@@ -94,7 +94,7 @@ function parseUiProvider(value: unknown): UiProvider {
 function parseCliProvider(value: unknown): CLIProvider {
   return value === 'claude' || value === 'codex' || value === 'opencode' || value === 'vibe'
     ? value
-    : 'codex';
+    : 'claude';
 }
 
 function parseCodexWebSearch(value: unknown): CodexWebSearchMode {
