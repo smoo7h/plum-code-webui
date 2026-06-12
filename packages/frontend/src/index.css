@@ -501,6 +501,99 @@
     --aurora-opacity: 0.62;
   }
 
+  :root.provider-sevenwave {
+    /* Riptide: ChatGPT-style cool neutral with brand-navy accents */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 0 0% 5%; /* #0d0d0d near-black */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+    --primary: 232 54% 36%; /* brand navy ≈ #2a3a8c */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 98%; /* #f9f9f9 sidebar */
+    --secondary-foreground: 0 0% 25%;
+    --muted: 0 0% 96%; /* #f4f4f4 bubbles, hover fills */
+    --muted-foreground: 0 0% 36%;
+    --accent: 230 45% 95%; /* #eef0f9 navy-tinted selection */
+    --accent-foreground: 232 54% 36%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 60% 36%;
+    --success-foreground: 0 0% 100%;
+    --border: 0 0% 93%; /* #ececec hairlines */
+    --input: 0 0% 85%; /* #d9d9d9 */
+    --ring: 232 54% 36%;
+
+    --claude-crail: 232 54% 36%;
+    --claude-terracotta: 232 54% 36%;
+    --claude-pampas: 0 0% 5%;
+    --claude-cloudy: 0 0% 36%;
+
+    --brand-accent: 232 54% 36%;
+    --brand-accent-2: 232 54% 36%; /* no two-tone gradients */
+    --pattern-color: 0 0% 36%;
+    --pattern-opacity: 0;
+
+    --shadow-color: 0 0% 20%;
+    --glow-color: 232 54% 36%;
+    --aurora-violet: 0 0% 60%;
+    --aurora-cyan: 0 0% 60%;
+    --aurora-rose: 0 0% 60%;
+    --aurora-gold: 0 0% 60%;
+    --aurora-deep: 0 0% 98%;
+    --aurora-opacity: 0;
+    --font-ui: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
+  :root.provider-sevenwave.dark {
+    --background: 0 0% 13%; /* #212121 ChatGPT dark */
+    --foreground: 0 0% 93%; /* #ececec */
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 93%;
+    --primary: 232 60% 70%; /* navy lightened for WCAG on dark */
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 9%; /* #171717 sidebar */
+    --secondary-foreground: 0 0% 80%;
+    --muted: 0 0% 18%; /* #2f2f2f */
+    --muted-foreground: 0 0% 64%;
+    --accent: 232 30% 24%; /* muted navy fill */
+    --accent-foreground: 232 60% 78%;
+    --destructive: 0 60% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 50% 45%;
+    --success-foreground: 0 0% 100%;
+    --border: 0 0% 22%;
+    --input: 0 0% 26%;
+    --ring: 232 60% 70%;
+
+    --claude-crail: 232 60% 70%;
+    --claude-terracotta: 232 60% 70%;
+    --claude-pampas: 0 0% 93%;
+    --claude-cloudy: 0 0% 64%;
+
+    --brand-accent: 232 60% 70%;
+    --brand-accent-2: 232 60% 70%;
+    --pattern-color: 0 0% 64%;
+    --pattern-opacity: 0;
+
+    --shadow-color: 0 0% 4%;
+    --glow-color: 232 60% 70%;
+    --aurora-violet: 0 0% 40%;
+    --aurora-cyan: 0 0% 40%;
+    --aurora-rose: 0 0% 40%;
+    --aurora-gold: 0 0% 40%;
+    --aurora-deep: 0 0% 10%;
+    --aurora-opacity: 0;
+    --font-ui: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
   * {
     @apply border-border;
   }
