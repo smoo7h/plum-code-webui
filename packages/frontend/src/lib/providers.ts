@@ -62,9 +62,9 @@ export const UI_PROVIDER_META: Record<
     id: 'sevenwave',
     label: 'Riptide',
     productName: 'Riptide',
-    tagline: 'WebUI',
+    tagline: '',
     loginCta: 'Continue to Riptide',
-    description: 'Riptide — powered by 7th Wave AI.',
+    description: 'Riptide workspace for CRM agent sessions.',
   },
 };
 
@@ -95,7 +95,7 @@ export const UI_PROVIDER_THEME_COLOR: Record<UiProvider, string> = {
   codex: '#000000',
   opencode: '#160d2b',
   vibe: '#1e1e1e',
-  sevenwave: '#4a1a6b',
+  sevenwave: '#ffffff',
 };
 
 export const CLI_PROVIDER_LIMIT_LABELS: Record<
@@ -131,7 +131,7 @@ export const CLI_PROVIDER_LIMIT_LABELS: Record<
 };
 
 const CLI_TO_UI: Record<CLIProvider, UiProvider> = {
-  claude: 'claude',
+  claude: 'sevenwave',
   codex: 'codex',
   opencode: 'opencode',
   vibe: 'vibe',
@@ -146,13 +146,8 @@ const UI_TO_CLI: Record<UiProvider, CLIProvider> = {
   sevenwave: 'claude',
 };
 
-export function normalizeUiProvider(value?: string | null): UiProvider {
-  const key = (value || '').toLowerCase();
-  if (key === 'plum') return 'plum';
-  if (key === 'codex') return 'codex';
-  if (key === 'opencode') return 'opencode';
-  if (key === 'vibe') return 'vibe';
-  if (key === 'sevenwave') return 'sevenwave';
+export function normalizeUiProvider(_value?: string | null): UiProvider {
+  // UI is locked to the 7th Wave theme; legacy stored values all map here.
   return 'sevenwave';
 }
 

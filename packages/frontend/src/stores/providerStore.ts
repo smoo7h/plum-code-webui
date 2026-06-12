@@ -13,7 +13,9 @@ interface ProviderState {
 
 export const useProviderStore = create<ProviderState>((set) => ({
   uiProvider: getStoredUiProvider(),
-  setProvider: (provider) => {
+  setProvider: (_provider) => {
+    // Theme is locked to sevenwave; CLI-provider logic stays independent.
+    const provider: UiProvider = 'sevenwave';
     setStoredUiProvider(provider);
     applyProviderClass(provider);
     set({ uiProvider: provider });
