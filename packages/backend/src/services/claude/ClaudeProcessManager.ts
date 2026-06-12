@@ -5700,6 +5700,20 @@ ${proc.contextReminder.summary}
       if (claudeSessionId) {
         args.push('--resume', claudeSessionId);
       }
+
+      // The permission-restart path must re-inject --mcp-config so stdio MCP
+      // servers (crm-data, …) re-register after the approve restart. Without
+      // this the resumed Claude has zero MCP servers and crm-data "disconnects"
+      // right after Approve in Manual mode. Mirror the main spawn path (which
+      // adds --mcp-config via resolveClaudeSettingsPath + existsSync guard).
+      const mcpConfigPath = resolveClaudeSettingsPath();
+      try {
+        if (fsSync.existsSync(mcpConfigPath)) {
+          args.push('--mcp-config', mcpConfigPath);
+        }
+      } catch {
+        // best-effort — missing file just means no extra stdio MCPs
+      }
     } else {
       // Build command args using CLI provider abstraction
       args = getCLIArgs(cliProvider, {
