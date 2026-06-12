@@ -7,7 +7,7 @@
  * Codex is the primary admin provider going forward. Anthropic is restricting
  * `claude -p` and moving to a credit system, so Claude is treated as a fallback.
  *
- * Order of preference: codex → opencode → vibe → claude.
+ * Order of preference: claude → codex → opencode → vibe.
  * Override via env `ADMIN_LLM_PROVIDER=codex|opencode|vibe|claude`.
  */
 

@@ -61,7 +61,7 @@ _Responsive chat with the same provider-aware UI on phone-sized viewports._
 - Per-session provider selection; switching providers restarts the underlying CLI cleanly
 - Dedicated auth routes: `/auth/codex`, `/auth/opencode`, `/auth/vibe`, `/auth/claude`
 - Independent CLI instances + persisted auth per provider (`~/.codex`, `~/.local/share/opencode`, `~/.vibe`, `~/.claude`)
-- Admin/helper LLM calls, such as commit message generation, route through the same Codex-first provider preference
+- Admin/helper LLM calls, such as commit message generation, route through the same Claude-first provider preference
 
 ### Analytics
 
