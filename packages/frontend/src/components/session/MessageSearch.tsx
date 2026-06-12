@@ -200,7 +200,7 @@ export function MessageSearch({ sessionId, onResultClick, className }: MessageSe
                           'text-xs font-medium px-1.5 py-0.5 rounded',
                           result.role === 'user'
                             ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                            : 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
+                            : 'bg-accent text-accent-foreground'
                         )}
                       >
                         {result.role}

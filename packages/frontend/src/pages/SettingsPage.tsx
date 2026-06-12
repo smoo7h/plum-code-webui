@@ -1310,10 +1310,10 @@ export function SettingsPage() {
           </Card>
 
           {/* Plugins Count Card */}
-          <Card className="border-violet-500/20 bg-violet-500/5">
+          <Card className="border-primary/30 bg-accent">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-violet-500/15 text-violet-600 dark:text-violet-400">
+                <div className="p-2 rounded-lg bg-accent text-primary">
                   <Puzzle className="h-4 w-4" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -2162,7 +2162,7 @@ export function SettingsPage() {
                         }
                       }}
                       disabled={!modelProviderId || !modelModelId}
-                      className="bg-purple-600 hover:bg-purple-700"
+                      className="bg-primary hover:bg-primary/90"
                     >
                       <Plus className="h-4 w-4 mr-1" />
                       Modell hinzufügen
@@ -2205,7 +2205,7 @@ export function SettingsPage() {
                         {openCodeModels.map((model) => (
                           <div
                             key={model}
-                            className="group flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-sm font-mono"
+                            className="group flex items-center gap-1 px-2.5 py-1 rounded-lg bg-accent border border-primary/30 text-sm font-mono"
                           >
                             <span>{model}</span>
                             <button
@@ -2472,7 +2472,7 @@ export function SettingsPage() {
                           key={provider.id}
                           className="group flex items-center gap-4 p-4 rounded-xl border bg-card transition-all hover:border-primary/30 hover:shadow-sm"
                         >
-                          <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                          <div className="p-2.5 rounded-lg bg-accent text-primary">
                             <Key className="h-4 w-4" />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -2531,7 +2531,7 @@ export function SettingsPage() {
                 <CardHeader>
                   <CardTitle className="text-base">Image generation</CardTitle>
                   <CardDescription>
-                    Plum Code WebUI ships three baked-in workflows (Z-Image Turbo, Flux.2 Klein T2I,
+                    Riptide ships three baked-in workflows (Z-Image Turbo, Flux.2 Klein T2I,
                     Flux.2 Klein image-edit). Set your ComfyUI server URL below — every CLI session
                     can then generate images via the{' '}
                     <code className="px-1 py-0.5 rounded bg-muted text-xs">generate_image</code>,{' '}
@@ -2901,7 +2901,7 @@ export function SettingsPage() {
                                 ? 'bg-red-500/10 text-red-600 dark:text-red-400'
                                 : server.type === 'subprocess'
                                   ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                                  : 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+                                  : 'bg-accent text-primary'
                           )}
                         >
                           {testResult?.testing ? (
@@ -2946,7 +2946,7 @@ export function SettingsPage() {
                             'px-2.5 py-1 text-xs rounded-full font-medium shrink-0',
                             server.type === 'subprocess'
                               ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                              : 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+                              : 'bg-accent text-primary'
                           )}
                         >
                           {server.type.toUpperCase()}
@@ -3374,7 +3374,7 @@ export function SettingsPage() {
                 <div className="flex items-center gap-2">
                   <h2 className="text-lg font-semibold">Plugins</h2>
                   {installedPlugins && installedPlugins.length > 0 && (
-                    <span className="px-2 py-0.5 text-xs font-medium bg-violet-500/10 text-violet-600 dark:text-violet-400 rounded-full">
+                    <span className="px-2 py-0.5 text-xs font-medium bg-accent text-primary rounded-full">
                       {filteredPlugins.length}/{installedPlugins.length}
                     </span>
                   )}
@@ -3392,7 +3392,7 @@ export function SettingsPage() {
                   <Button
                     size="sm"
                     onClick={() => openPluginEditor('create')}
-                    className="gap-1.5 h-8 px-3 text-xs bg-violet-600 hover:bg-violet-700"
+                    className="gap-1.5 h-8 px-3 text-xs bg-primary hover:bg-primary/90"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     Create
@@ -3438,7 +3438,7 @@ export function SettingsPage() {
                           className={cn(
                             'group relative overflow-hidden transition-all hover:shadow-md',
                             plugin.enabled
-                              ? 'hover:border-violet-500/30'
+                              ? 'hover:border-primary/30'
                               : 'opacity-60 hover:opacity-80'
                           )}
                         >
@@ -3448,7 +3448,7 @@ export function SettingsPage() {
                                 className={cn(
                                   'p-2 rounded-lg shrink-0',
                                   plugin.enabled
-                                    ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400'
+                                    ? 'bg-accent text-primary'
                                     : 'bg-muted text-muted-foreground'
                                 )}
                               >
@@ -3474,7 +3474,7 @@ export function SettingsPage() {
                                     className={cn(
                                       'px-1.5 py-0.5 text-[10px] rounded',
                                       isUserPlugin
-                                        ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400'
+                                        ? 'bg-accent text-primary'
                                         : 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
                                     )}
                                   >
@@ -3501,7 +3501,7 @@ export function SettingsPage() {
                                     title={plugin.enabled ? 'Disable' : 'Enable'}
                                   >
                                     {plugin.enabled ? (
-                                      <ToggleRight className="h-4 w-4 text-violet-600" />
+                                      <ToggleRight className="h-4 w-4 text-primary" />
                                     ) : (
                                       <ToggleLeft className="h-4 w-4 text-muted-foreground" />
                                     )}
@@ -3530,7 +3530,7 @@ export function SettingsPage() {
                           </CardContent>
                           <div
                             className={cn(
-                              'absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-violet-500/50 to-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity',
+                              'absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-primary/50 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity',
                               !plugin.enabled && 'from-muted-foreground/30 to-muted-foreground/10'
                             )}
                           />
@@ -3561,8 +3561,8 @@ export function SettingsPage() {
               ) : (
                 <Card className="border-dashed">
                   <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="p-4 rounded-full bg-violet-500/10 mb-4">
-                      <Puzzle className="h-8 w-8 text-violet-500/50" />
+                    <div className="p-4 rounded-full bg-accent mb-4">
+                      <Puzzle className="h-8 w-8 text-primary/50" />
                     </div>
                     <p className="font-medium text-muted-foreground mb-1">No plugins installed</p>
                     <p className="text-sm text-muted-foreground/70 max-w-xs mb-4">
@@ -3581,7 +3581,7 @@ export function SettingsPage() {
                       <Button
                         size="sm"
                         onClick={() => openPluginEditor('create')}
-                        className="gap-2 bg-violet-600 hover:bg-violet-700"
+                        className="gap-2 bg-primary hover:bg-primary/90"
                       >
                         <Plus className="h-4 w-4" />
                         Create Plugin
@@ -3619,7 +3619,7 @@ export function SettingsPage() {
                         type="button"
                         key={mp.id}
                         onClick={() => setMarketplaceBrowserOpen(true)}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 border text-sm hover:border-violet-500/30 transition-colors"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 border text-sm hover:border-primary/30 transition-colors"
                       >
                         <span className="font-medium">{mp.name}</span>
                         {mp.plugins && (
@@ -3854,7 +3854,7 @@ export function SettingsPage() {
               <Button
                 onClick={saveOpenCodeProvider}
                 disabled={!openCodeProviderForm.id || !openCodeProviderForm.apiKey}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 Provider speichern
               </Button>

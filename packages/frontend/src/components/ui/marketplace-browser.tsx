@@ -251,8 +251,8 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
       <div className="relative w-full max-w-5xl max-h-[90vh] bg-card rounded-2xl border shadow-2xl overflow-hidden animate-scale-in flex flex-col">
         {/* Header */}
         <div className="flex items-center gap-3 p-5 border-b bg-muted/30">
-          <div className="p-2.5 rounded-xl bg-violet-500/10">
-            <Store className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+          <div className="p-2.5 rounded-xl bg-accent">
+            <Store className="h-5 w-5 text-primary" />
           </div>
           <div className="flex-1">
             <h2 className="text-lg font-semibold">Plugin Marketplace</h2>
@@ -276,7 +276,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                 <Button
                   size="sm"
                   onClick={() => setShowAddForm(!showAddForm)}
-                  className="w-full gap-2 bg-violet-600 hover:bg-violet-700"
+                  className="w-full gap-2 bg-primary hover:bg-primary/90"
                 >
                   <Plus className="h-4 w-4" />
                   Add Marketplace
@@ -286,7 +286,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
 
             {/* Add Marketplace Form */}
             {!isCodex && showAddForm && (
-              <div className="p-3 border-b bg-violet-500/5 space-y-3">
+              <div className="p-3 border-b bg-muted/40 space-y-3">
                 <Input
                   placeholder="Marketplace name"
                   value={newMarketplace.name}
@@ -370,7 +370,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                     className={cn(
                       'w-full flex items-center gap-2 p-2.5 rounded-lg text-left transition-colors',
                       selectedMarketplace === mp.id
-                        ? 'bg-violet-500/15 text-violet-600 dark:text-violet-400'
+                        ? 'bg-accent text-primary'
                         : 'hover:bg-muted'
                     )}
                   >
@@ -491,7 +491,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                           onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
                           className={cn(
                             'h-9 gap-1.5',
-                            selectedCategory && 'bg-violet-500/10 border-violet-500/30'
+                            selectedCategory && 'bg-accent border-primary/30'
                           )}
                         >
                           <Filter className="h-3.5 w-3.5" />
@@ -514,7 +514,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                                 }}
                                 className={cn(
                                   'w-full px-3 py-2 text-left text-sm hover:bg-muted transition-colors',
-                                  !selectedCategory && 'bg-violet-500/10'
+                                  !selectedCategory && 'bg-accent'
                                 )}
                               >
                                 All Categories
@@ -532,7 +532,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                                   }}
                                   className={cn(
                                     'w-full px-3 py-2 text-left text-sm hover:bg-muted transition-colors capitalize',
-                                    selectedCategory === category && 'bg-violet-500/10'
+                                    selectedCategory === category && 'bg-accent'
                                   )}
                                 >
                                   {category}
@@ -561,7 +561,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                           setSearchQuery('');
                           setSelectedCategory(null);
                         }}
-                        className="text-violet-500 hover:underline"
+                        className="text-primary hover:underline"
                       >
                         Clear filters
                       </button>
@@ -592,7 +592,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                                 ? 'border-green-500/30 bg-green-500/5'
                                 : cached
                                   ? 'border-blue-500/25 bg-blue-500/5'
-                                  : 'hover:border-violet-500/30'
+                                  : 'hover:border-primary/30'
                             )}
                           >
                             <div className="flex items-start gap-3">
@@ -601,7 +601,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                                   'p-2 rounded-lg shrink-0',
                                   installed
                                     ? 'bg-green-500/10 text-green-600 dark:text-green-400'
-                                    : 'bg-violet-500/10 text-violet-600 dark:text-violet-400'
+                                    : 'bg-accent text-primary'
                                 )}
                               >
                                 <Puzzle className="h-4 w-4" />
@@ -663,7 +663,7 @@ export function MarketplaceBrowser({ onClose, configProvider }: MarketplaceBrows
                                     })
                                   }
                                   disabled={installPluginMutation.isPending}
-                                  className="h-8 gap-1.5 bg-violet-600 hover:bg-violet-700"
+                                  className="h-8 gap-1.5 bg-primary hover:bg-primary/90"
                                 >
                                   {installPluginMutation.isPending ? (
                                     <Loader2 className="h-3.5 w-3.5 animate-spin" />

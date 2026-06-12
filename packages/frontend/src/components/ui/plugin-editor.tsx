@@ -174,8 +174,8 @@ export function PluginEditor({
       <div className="relative w-full max-w-2xl max-h-[90vh] bg-card rounded-2xl border shadow-2xl overflow-hidden animate-scale-in flex flex-col">
         {/* Header */}
         <div className="flex items-center gap-3 p-5 border-b bg-muted/30">
-          <div className="p-2.5 rounded-xl bg-violet-500/10">
-            <Puzzle className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+          <div className="p-2.5 rounded-xl bg-accent">
+            <Puzzle className="h-5 w-5 text-primary" />
           </div>
           <div className="flex-1">
             <h2 className="text-lg font-semibold">
@@ -333,7 +333,7 @@ export function PluginEditor({
               type="submit"
               onClick={handleSubmit}
               disabled={!formData.name || !formData.content || isPending}
-              className={cn('gap-2', 'bg-violet-600 hover:bg-violet-700')}
+              className={cn('gap-2', 'bg-primary hover:bg-primary/90')}
             >
               <Save className="h-4 w-4" />
               {isPending ? 'Saving...' : mode === 'create' ? 'Create' : 'Save Changes'}

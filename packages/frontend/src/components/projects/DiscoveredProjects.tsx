@@ -131,7 +131,7 @@ export function DiscoveredProjects({
             ) : (
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             )}
-            <FolderSearch className="h-5 w-5 text-purple-500" />
+            <FolderSearch className="h-5 w-5 text-primary" />
             <CardTitle className="text-lg">Discovered Projects</CardTitle>
             <span className="text-sm text-muted-foreground">({projects.length})</span>
           </div>

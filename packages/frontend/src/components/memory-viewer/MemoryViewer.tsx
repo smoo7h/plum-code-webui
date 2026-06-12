@@ -226,7 +226,7 @@ export function MemoryViewer({ workingDirectory, className }: MemoryViewerProps)
         {/* Header */}
         <div className="shrink-0 flex items-center justify-between p-3 border-b">
           <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-purple-500" />
+            <Brain className="h-5 w-5 text-primary" />
             <h3 className="font-medium">Memories</h3>
             <span className="text-xs text-muted-foreground">
               {files.length} file{files.length !== 1 ? 's' : ''}
@@ -305,14 +305,14 @@ export function MemoryViewer({ workingDirectory, className }: MemoryViewerProps)
                   <FileText
                     className={cn(
                       'h-4 w-4 shrink-0',
-                      file.name === 'MEMORY.md' ? 'text-purple-500' : 'text-muted-foreground'
+                      file.name === 'MEMORY.md' ? 'text-primary' : 'text-muted-foreground'
                     )}
                   />
                   <div className="flex-1 min-w-0">
                     <div className="truncate font-medium">
                       {file.name}
                       {file.name === 'MEMORY.md' && (
-                        <span className="ml-1.5 text-[10px] bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 px-1.5 py-0.5 rounded">
+                        <span className="ml-1.5 text-[10px] bg-accent text-accent-foreground px-1.5 py-0.5 rounded">
                           Main
                         </span>
                       )}
@@ -365,7 +365,7 @@ export function MemoryViewer({ workingDirectory, className }: MemoryViewerProps)
           <FileText
             className={cn(
               'h-4 w-4',
-              selectedFile.name === 'MEMORY.md' ? 'text-purple-500' : 'text-muted-foreground'
+              selectedFile.name === 'MEMORY.md' ? 'text-primary' : 'text-muted-foreground'
             )}
           />
           <h3 className="font-medium text-sm truncate">{selectedFile.name}</h3>

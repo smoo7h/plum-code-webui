@@ -246,7 +246,7 @@ export function PermissionApprovalDialog({
             <button
               onClick={() => handleRespond('allow_global')}
               disabled={isSubmitting}
-              className="flex items-center justify-center gap-2 px-4 py-3 sm:py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium disabled:opacity-50 transition-colors text-sm"
+              className="flex items-center justify-center gap-2 px-4 py-3 sm:py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium disabled:opacity-50 transition-colors text-sm"
             >
               <ShieldCheck className="h-4 w-4" />
               Allow Globally

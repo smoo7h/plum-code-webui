@@ -77,8 +77,8 @@ export function GitDiffViewer({ workingDirectory, file, staged }: GitDiffViewerP
             let bgClass = '';
 
             if (line.startsWith('@@')) {
-              lineClass = 'text-purple-400';
-              bgClass = 'bg-purple-500/5';
+              lineClass = 'text-muted-foreground';
+              bgClass = 'bg-muted/40';
             } else if (line.startsWith('+++') || line.startsWith('---')) {
               lineClass = 'text-muted-foreground font-bold';
             } else if (line.startsWith('+')) {

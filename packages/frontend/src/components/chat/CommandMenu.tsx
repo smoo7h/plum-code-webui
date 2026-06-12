@@ -57,7 +57,7 @@ export function CommandMenu({
       case 'user':
         return <User className="h-3.5 w-3.5 text-green-500" />;
       case 'project':
-        return <FolderGit className="h-3.5 w-3.5 text-purple-500" />;
+        return <FolderGit className="h-3.5 w-3.5 text-primary" />;
       default:
         return null;
     }
