@@ -2,7 +2,7 @@
 
 Self-hosted web interface for Codex, OpenCode, Mistral Vibe, and Claude Code CLIs. Plum Code WebUI gives each provider the same browser workspace: streaming chat, tool approvals, file and git panes, provider analytics, shared agents/skills/plugins, preview tooling, and built-in MCP servers inside one Docker deployment.
 
-> **Default provider: Codex.** Anthropic is restricting `claude -p` / introducing a credit system, so Codex is now the primary CLI. Claude stays available as a legacy option.
+> **Default provider: Claude Code (this fork).** The CRM sandbox image ships Claude-only, so Claude is the primary CLI. Codex, OpenCode, and Vibe remain wired in for upstream parity.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
@@ -54,10 +54,10 @@ _Responsive chat with the same provider-aware UI on phone-sized viewports._
 
 ### Multi-Provider Support
 
-- **Codex** (OpenAI) - **default provider**, per-turn `codex exec` process model with auto-respawn, chunk-level streaming, transcript-prefix resume, and model discovery from `~/.codex/models_cache.json`
+- **Codex** (OpenAI) - per-turn `codex exec` process model with auto-respawn, chunk-level streaming, transcript-prefix resume, and model discovery from `~/.codex/models_cache.json`
 - **OpenCode** - server-backed HTTP/SSE provider routing for GLM (`z-ai/glm-*`), Kimi, Anthropic/OpenAI/Gemini routes, and 75+ other LLMs
 - **Mistral Vibe** - Mistral Medium 3.5 / Devstral coding models, argv-based prompt execution, per-session `VIBE_HOME`, and `--continue` resume
-- **Claude Code** (Anthropic) - legacy persistent stream-json provider
+- **Claude Code** (Anthropic) - **default provider (this fork)**, persistent stream-json provider
 - Per-session provider selection; switching providers restarts the underlying CLI cleanly
 - Dedicated auth routes: `/auth/codex`, `/auth/opencode`, `/auth/vibe`, `/auth/claude`
 - Independent CLI instances + persisted auth per provider (`~/.codex`, `~/.local/share/opencode`, `~/.vibe`, `~/.claude`)
@@ -187,7 +187,7 @@ The installer walks you through:
 2. **Interactive `.env`** - public URL, port, allowlisted login emails, host paths for data/config/workspace. Auto-generates `SESSION_SECRET` + `JWT_SECRET`.
 3. **`docker compose build` + `up -d`** - first run takes a few minutes.
 4. **Health wait** - polls `/health` (or the container's healthcheck) for up to 2 min.
-5. **Optional Codex login** - runs `codex login` inside the container because Codex is the default provider. Other providers can be authenticated later from Settings or their dedicated `/auth/<provider>` route. Can be skipped with `--skip-login`.
+5. **Optional provider login** - logs into the default provider inside the container (Claude for this fork; upstream uses `codex login`). Other providers can be authenticated later from Settings or their dedicated `/auth/<provider>` route. Can be skipped with `--skip-login`.
 
 Re-run any time to reconfigure (existing `.env` values are preserved unless you pass `--reset`). Non-interactive mode (`--non-interactive`) takes all defaults and is useful for CI bootstraps.
 
@@ -254,7 +254,7 @@ Full schema in `packages/backend/src/config.ts` (zod-validated, fails fast on st
 | `CLI_PROVIDER_<PROVIDER>_MODELS`                                                    | Override model menus for `CODEX`, `OPENCODE`, `VIBE`, or `CLAUDE`; empty means auto-discover or use provider fallback.                                      | No          |
 | `CLI_PROVIDER_<PROVIDER>_DEFAULT_MODEL`                                             | Override defaults such as Codex `gpt-5.5`, OpenCode `z-ai/glm-5.1`, Vibe `mistral-vibe-cli-latest`, or Claude `sonnet`.                                    | No          |
 | `MISTRAL_API_KEY`                                                                  | Enables Mistral Vibe when no user-specific key is stored in Settings.                                                                                        | No          |
-| `ADMIN_LLM_PROVIDER`                                                               | Pin admin/helper calls to `codex`, `opencode`, `vibe`, or `claude`. Default preference is Codex first.                                                       | No          |
+| `ADMIN_LLM_PROVIDER`                                                               | Pin admin/helper calls to `codex`, `opencode`, `vibe`, or `claude`. Default preference is Claude first.                                                       | No          |
 | `CODEX_WEBUI_SANDBOX_MODE` / `CODEX_WEBUI_APPROVAL_POLICY`                         | Codex Docker defaults. The image defaults to `danger-full-access` / `never` because Codex's Landlock `workspace-write` sandbox is unreliable inside Docker. | No          |
 | `CODEX_USAGE_URL` / `CODEX_USER_AGENT`                                              | Override the ChatGPT Codex usage endpoint or User-Agent used for `/api/usage/limits?provider=codex`.                                                        | No          |
 | `COMFYUI_URL`                                                                      | Fallback ComfyUI base URL. Settings can override it without restart.                                                                                         | No          |

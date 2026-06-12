@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository
 
-Web UI for Codex, OpenCode, Mistral Vibe, and Claude Code CLIs. **Codex is the default provider** — Anthropic is restricting `claude -p` / moving to a credit system, so Codex took over as the primary CLI. Claude is still available as a legacy option. pnpm monorepo deployed as a single Docker container on Unraid.
+Web UI for Codex, OpenCode, Mistral Vibe, and Claude Code CLIs. **Claude Code is the default provider for this fork** — the CRM sandbox image ships Claude-only, so Claude is the primary CLI. Codex, OpenCode, and Vibe remain wired in for upstream parity. pnpm monorepo deployed as a single Docker container on Unraid.
 
 ## Commands
 
@@ -47,7 +47,7 @@ Entry: `packages/backend/src/index.ts`. Routes live in `src/routes/` (~30 module
 
 **CLI process model** (`ClaudeProcessManager` — owns all four providers despite the name):
 
-- **Codex** (default): `codex exec --json` per-turn; manager respawns on `turn.completed` / process exit. Streaming via `item.delta` / `agent_message.delta` / `text.delta` events (Codex 0.130+). Resume via transcript replay — `buildCodexContextPrefix()` reads prior turns from SQLite and prepends them to stdin on respawn.
+- **Codex**: `codex exec --json` per-turn; manager respawns on `turn.completed` / process exit. Streaming via `item.delta` / `agent_message.delta` / `text.delta` events (Codex 0.130+). Resume via transcript replay — `buildCodexContextPrefix()` reads prior turns from SQLite and prepends them to stdin on respawn.
 - **OpenCode**: server-backed (HTTP/SSE), full stream-json, native resume.
 - **Mistral Vibe**: argv-based prompt (`-p TEXT`), per-turn spawn; isolated `VIBE_HOME` per WebUI session; `--continue` flag for resume.
 - **Claude** (legacy): `claude --print --verbose --output-format stream-json --input-format stream-json --include-partial-messages [--dangerously-skip-permissions]`. The `--dangerously-skip-permissions` flag is appended **only** in auto-accept / danger modes; manual and planning modes drop it so the PreToolUse hook gates each tool call.
@@ -101,7 +101,7 @@ docker compose up -d --build        # if you already have .env + an override
 The override file pins these to absolute paths so state survives container rebuilds:
 
 - `/mnt/user/appdata/claude-code-webui/data` → `/app/packages/backend/data` (SQLite DB, session files)
-- `/mnt/user/appdata/claude-code-webui/config/codex` → `/home/node/.codex` (primary provider)
+- `/mnt/user/appdata/claude-code-webui/config/codex` → `/home/node/.codex`
 - `/mnt/user/appdata/claude-code-webui/config/opencode` → `/home/node/.opencode`
 - `/mnt/user/appdata/claude-code-webui/config/vibe` → `/home/node/.vibe`
 - `/mnt/user/appdata/claude-code-webui/config/claude` → `/home/node/.claude` (legacy)
@@ -158,7 +158,7 @@ Common:
 - `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET`/`GOOGLE_CALLBACK_URL`
 - `CLAUDE_OAUTH_ENABLED` (default `true`; set `false` to disable) — Claude is legacy, still works but no longer the default
 - `CLAUDE_USER_EMAIL` — display-only (Anthropic API is Cloudflare-gated)
-- `ADMIN_LLM_PROVIDER` — override the admin/helper LLM choice for commit messages etc. (default order: `codex` → `opencode` → `vibe` → `claude`)
+- `ADMIN_LLM_PROVIDER` — override the admin/helper LLM choice for commit messages etc. (default order: `claude` → `codex` → `opencode` → `vibe`)
 - `ENCRYPTION_KEY` — for encrypted stored credentials
 - `WEBUI_HOOK_SECRET` — shared secret proving a request came from the permission-prompt hook; auto-generated per process if unset
 - `PREVIEW_HOSTNAME` — hostname of the preview subdomain for in-container dev servers

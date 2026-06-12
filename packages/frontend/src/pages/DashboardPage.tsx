@@ -191,7 +191,7 @@ export function DashboardPage() {
   const providerCounts = useMemo(() => {
     return sessions.reduce(
       (acc, session) => {
-        const provider = session.cliProvider || 'codex';
+        const provider = session.cliProvider || 'claude';
         acc[provider] = (acc[provider] || 0) + 1;
         return acc;
       },

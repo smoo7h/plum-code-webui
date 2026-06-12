@@ -15,7 +15,7 @@ import { spawn } from 'child_process';
 import { isProviderAvailable, type CLIProvider } from '../services/cli-providers';
 import { getCodexWebuiApprovalPolicy, getCodexWebuiSandboxMode } from './codexDefaults';
 
-const DEFAULT_ORDER: CLIProvider[] = ['codex', 'opencode', 'vibe', 'claude'];
+const DEFAULT_ORDER: CLIProvider[] = ['claude', 'codex', 'opencode', 'vibe'];
 
 interface RunOpts {
   cwd?: string;
