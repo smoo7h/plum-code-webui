@@ -50,7 +50,7 @@ Entry: `packages/backend/src/index.ts`. Routes live in `src/routes/` (~30 module
 - **Codex** (default): `codex exec --json` per-turn; manager respawns on `turn.completed` / process exit. Streaming via `item.delta` / `agent_message.delta` / `text.delta` events (Codex 0.130+). Resume via transcript replay — `buildCodexContextPrefix()` reads prior turns from SQLite and prepends them to stdin on respawn.
 - **OpenCode**: server-backed (HTTP/SSE), full stream-json, native resume.
 - **Mistral Vibe**: argv-based prompt (`-p TEXT`), per-turn spawn; isolated `VIBE_HOME` per WebUI session; `--continue` flag for resume.
-- **Claude** (legacy): `claude --print --verbose --output-format stream-json --input-format stream-json --include-partial-messages --dangerously-skip-permissions`.
+- **Claude** (legacy): `claude --print --verbose --output-format stream-json --input-format stream-json --include-partial-messages [--dangerously-skip-permissions]`. The `--dangerously-skip-permissions` flag is appended **only** in auto-accept / danger modes; manual and planning modes drop it so the PreToolUse hook gates each tool call.
 - Parses stream-json events and forwards them over Socket.IO. Message queue accepts input while the CLI is working; interrupts via SIGINT.
 
 **Key Socket.IO events** (server → client):

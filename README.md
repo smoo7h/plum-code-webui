@@ -277,8 +277,10 @@ opencode run --format json --model z-ai/glm-5.1 ...
 vibe --output streaming --trust --workdir /workspace/my-project -p "..."
 
 # Claude Code - legacy persistent stream-json provider
+# --dangerously-skip-permissions is appended only in auto-accept/danger modes;
+# manual/planning modes drop it so the PreToolUse hook gates each tool call.
 claude --print --verbose --output-format stream-json --input-format stream-json \
-       --include-partial-messages --dangerously-skip-permissions
+       --include-partial-messages [--dangerously-skip-permissions]
 ```
 
 All CLIs ship inside the container; their auth/state directories (`~/.codex`, `~/.opencode`, `~/.vibe`, `~/.claude`) survive rebuilds via the `${CONFIG_DIR}` bind mount. OpenCode is symlinked into its expected `~/.config/opencode` and `~/.local/share/opencode` paths. The runtime image also includes system Chromium, Chromedriver, fonts, and Xvfb; sessions inherit `CHROME_BIN=/usr/local/bin/plum-chromium` plus Playwright/Puppeteer executable-path env vars for headless browser checks.
