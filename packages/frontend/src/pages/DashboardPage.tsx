@@ -11,7 +11,6 @@ import {
   Folder,
   Tags,
   Bot,
-  Palette,
   ArrowUpRight,
   MoreHorizontal,
   Pencil,
@@ -40,7 +39,7 @@ import { toast } from '@/hooks/use-toast';
 import type { Session, ApiResponse, UserSettings, CLIProvider } from '@claude-code-webui/shared';
 import { cn } from '@/lib/utils';
 import { useProviderStore } from '@/stores/providerStore';
-import { toCliProvider, toUiProvider, UI_PROVIDER_META, type UiProvider } from '@/lib/providers';
+import { toCliProvider, toUiProvider, UI_PROVIDER_META } from '@/lib/providers';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,7 +53,7 @@ export function DashboardPage() {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
   const { setSessions, sessions, updateSession } = useSessionStore();
-  const { uiProvider, setProvider } = useProviderStore();
+  const { uiProvider } = useProviderStore();
 
   const [showNewSession, setShowNewSession] = useState(searchParams.get('new') === 'true');
   const [newSessionName, setNewSessionName] = useState('');
@@ -77,12 +76,6 @@ export function DashboardPage() {
       return response.data.data;
     },
   });
-
-  useEffect(() => {
-    if (settings?.uiProvider) {
-      setProvider(settings.uiProvider);
-    }
-  }, [settings?.uiProvider, setProvider]);
 
   useEffect(() => {
     if (!settings?.defaultCliProvider) return;
@@ -143,31 +136,6 @@ export function DashboardPage() {
     },
     onError: (error: Error) => {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
-    },
-  });
-
-  const themeMutation = useMutation({
-    mutationFn: async (provider: UiProvider) => {
-      const response = await api.put<ApiResponse<UserSettings>>('/api/settings', {
-        uiProvider: provider,
-      });
-      return response.data.data;
-    },
-    onMutate: (provider) => {
-      setProvider(provider);
-      const previous = queryClient.getQueryData<UserSettings>(['settings']);
-      queryClient.setQueryData(['settings'], { ...(previous || {}), uiProvider: provider });
-      return { previous };
-    },
-    onError: (error: Error, _provider, context) => {
-      if (context?.previous) {
-        queryClient.setQueryData(['settings'], context.previous);
-        if (context.previous.uiProvider) setProvider(context.previous.uiProvider as UiProvider);
-      }
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
-    },
-    onSuccess: (data) => {
-      if (data) queryClient.setQueryData(['settings'], data);
     },
   });
 
@@ -291,26 +259,6 @@ export function DashboardPage() {
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-1.5">
-                <Palette className="h-4 w-4" />
-                <span className="hidden md:inline">{UI_PROVIDER_META[uiProvider].label}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="panel-dropdown w-44">
-              {(Object.keys(UI_PROVIDER_META) as UiProvider[]).map((provider) => (
-                <DropdownMenuItem
-                  key={provider}
-                  className="flex items-center gap-2 cursor-pointer"
-                  onClick={() => themeMutation.mutate(provider)}
-                >
-                  <ProviderLogo provider={provider} className="h-4 w-4" alt="" />
-                  <span className="flex-1">{UI_PROVIDER_META[provider].label}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
 
         <div className="dashboard-stat-grid">

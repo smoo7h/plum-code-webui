@@ -176,7 +176,7 @@ export function SessionPage() {
   >(null);
   const loadedModeForSessionRef = useRef<string | null>(null);
 
-  const { uiProvider, setProvider } = useProviderStore();
+  const { uiProvider } = useProviderStore();
   const pinnedPanels = usePanelDockStore((s) => s.pinned);
   const togglePinPanel = usePanelDockStore((s) => s.togglePin);
   const setPinnedPanel = usePanelDockStore((s) => s.setPinned);
@@ -1098,16 +1098,6 @@ export function SessionPage() {
     });
     return unsubscribe;
   }, [id, sessionModeStorageKey]);
-
-  useEffect(() => {
-    if (!session?.cliProvider) {
-      return;
-    }
-    const nextUiProvider = toUiProvider(session.cliProvider);
-    if (nextUiProvider !== uiProvider) {
-      setProvider(nextUiProvider);
-    }
-  }, [session?.cliProvider, setProvider, uiProvider]);
 
   // Show a brief indicator when an assistant message is persisted
   useEffect(() => {
