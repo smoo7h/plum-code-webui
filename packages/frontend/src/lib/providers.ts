@@ -2,9 +2,9 @@ import type { CLIProvider as CLIProviderType } from '@claude-code-webui/shared';
 export type { CLIProvider } from '@claude-code-webui/shared';
 type CLIProvider = CLIProviderType;
 
-export type UiProvider = 'plum' | 'claude' | 'codex' | 'opencode' | 'vibe';
+export type UiProvider = 'plum' | 'claude' | 'codex' | 'opencode' | 'vibe' | 'sevenwave';
 
-export const DEFAULT_UI_PROVIDER: UiProvider = 'plum';
+export const DEFAULT_UI_PROVIDER: UiProvider = 'sevenwave';
 export const UI_PROVIDER_STORAGE_KEY = 'ui-provider';
 
 export const UI_PROVIDER_META: Record<
@@ -58,6 +58,14 @@ export const UI_PROVIDER_META: Record<
     loginCta: 'Continue with Mistral Vibe',
     description: 'Mistral Vibe CLI with Devstral/Codestral coding models.',
   },
+  sevenwave: {
+    id: 'sevenwave',
+    label: 'Riptide',
+    productName: 'Riptide',
+    tagline: 'WebUI',
+    loginCta: 'Continue to Riptide',
+    description: 'Riptide — powered by 7th Wave AI.',
+  },
 };
 
 export const CLI_PROVIDER_LABEL: Record<CLIProvider, string> = {
@@ -87,6 +95,7 @@ export const UI_PROVIDER_THEME_COLOR: Record<UiProvider, string> = {
   codex: '#000000',
   opencode: '#160d2b',
   vibe: '#1e1e1e',
+  sevenwave: '#4a1a6b',
 };
 
 export const CLI_PROVIDER_LIMIT_LABELS: Record<
@@ -134,6 +143,7 @@ const UI_TO_CLI: Record<UiProvider, CLIProvider> = {
   codex: 'codex',
   opencode: 'opencode',
   vibe: 'vibe',
+  sevenwave: 'claude',
 };
 
 export function normalizeUiProvider(value?: string | null): UiProvider {
@@ -142,7 +152,8 @@ export function normalizeUiProvider(value?: string | null): UiProvider {
   if (key === 'codex') return 'codex';
   if (key === 'opencode') return 'opencode';
   if (key === 'vibe') return 'vibe';
-  return 'plum';
+  if (key === 'sevenwave') return 'sevenwave';
+  return 'sevenwave';
 }
 
 export function toUiProvider(cliProvider?: CLIProvider | null): UiProvider {
@@ -179,7 +190,8 @@ export function applyProviderClass(provider: UiProvider): void {
     'provider-claude',
     'provider-codex',
     'provider-opencode',
-    'provider-vibe'
+    'provider-vibe',
+    'provider-sevenwave'
   );
   root.classList.add(`provider-${provider}`);
   root.setAttribute('data-provider', provider);

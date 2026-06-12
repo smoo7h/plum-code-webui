@@ -1,7 +1,7 @@
 import type { CLIProvider } from './session.js';
 
 export type Theme = 'dark' | 'light' | 'system';
-export type UiProvider = 'plum' | 'claude' | 'codex' | 'opencode' | 'vibe';
+export type UiProvider = 'plum' | 'claude' | 'codex' | 'opencode' | 'vibe' | 'sevenwave';
 export type CodexWebSearchMode = 'auto' | 'cached' | 'live' | 'disabled';
 export type CodexServiceTier = 'fast';
 

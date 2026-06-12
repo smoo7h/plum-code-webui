@@ -22,7 +22,7 @@ const updateSettingsSchema = z.object({
   defaultWorkingDir: z.string().nullable().optional(),
   allowedTools: z.array(z.string()).optional(),
   customSystemPrompt: z.string().nullable().optional(),
-  uiProvider: z.enum(['plum', 'claude', 'codex', 'opencode', 'vibe']).optional(),
+  uiProvider: z.enum(['plum', 'claude', 'codex', 'opencode', 'vibe', 'sevenwave']).optional(),
   defaultCliProvider: z.enum(['claude', 'codex', 'opencode', 'vibe']).optional(),
   cliProviderModels: z
     .object({
@@ -86,9 +86,10 @@ function parseUiProvider(value: unknown): UiProvider {
     value === 'claude' ||
     value === 'codex' ||
     value === 'opencode' ||
-    value === 'vibe'
+    value === 'vibe' ||
+    value === 'sevenwave'
     ? value
-    : 'plum';
+    : 'sevenwave';
 }
 
 function parseCliProvider(value: unknown): CLIProvider {
