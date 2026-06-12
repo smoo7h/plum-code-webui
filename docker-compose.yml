@@ -46,6 +46,8 @@ services:
       - AUTH_ALLOWED_EMAILS=${AUTH_ALLOWED_EMAILS:-}
       - SEED_ADMIN_EMAIL=${SEED_ADMIN_EMAIL:-}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
+      # Comma-separated provider ids to hide from the UI (codex,opencode,vibe,claude)
+      - WEBUI_DISABLED_PROVIDERS=${WEBUI_DISABLED_PROVIDERS:-}
       # Optional CLI provider model overrides
       - CLI_PROVIDER_CLAUDE_MODELS=${CLI_PROVIDER_CLAUDE_MODELS:-opus,sonnet,haiku}
       - CLI_PROVIDER_CLAUDE_DEFAULT_MODEL=${CLI_PROVIDER_CLAUDE_DEFAULT_MODEL:-sonnet}

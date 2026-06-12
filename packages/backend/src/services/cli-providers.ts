@@ -678,6 +678,23 @@ function envOr(provider: CLIProvider, key: string, fallback: string): string {
   return getProviderEnv(provider, key) || fallback;
 }
 
+// Providers listed in WEBUI_DISABLED_PROVIDERS (comma-separated ids, e.g.
+// "vibe,opencode") are hidden from the UI and treated as unavailable.
+const DISABLED_PROVIDERS = new Set(
+  (process.env.WEBUI_DISABLED_PROVIDERS ?? '')
+    .split(',')
+    .map((p) => p.trim().toLowerCase())
+    .filter(Boolean)
+);
+
+export function isProviderEnabled(provider: CLIProvider): boolean {
+  return !DISABLED_PROVIDERS.has(provider);
+}
+
+export function getEnabledProviders(): CLIProviderConfig[] {
+  return Object.values(CLI_PROVIDERS).filter((p) => isProviderEnabled(p.id));
+}
+
 // Insertion order matters: routes/cli-providers.ts uses Object.values() so the
 // frontend picker lists providers in this order. Codex is the primary going
 // forward; Claude is intentionally last (legacy) since claude -p is being
@@ -1230,6 +1247,8 @@ function getClaudePermissionFlags(mode: SessionMode): string[] {
  * Check if a CLI provider is available (credentials exist)
  */
 export async function isProviderAvailable(provider: CLIProvider): Promise<boolean> {
+  if (!isProviderEnabled(provider)) return false;
+
   const fs = await import('fs/promises');
   const os = await import('os');
 

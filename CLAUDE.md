@@ -163,6 +163,7 @@ Common:
 - `WEBUI_HOOK_SECRET` — shared secret proving a request came from the permission-prompt hook; auto-generated per process if unset
 - `PREVIEW_HOSTNAME` — hostname of the preview subdomain for in-container dev servers
 - `CLI_PROVIDER_CODEX_MODELS`, `CLI_PROVIDER_OPENCODE_MODELS`, `CLI_PROVIDER_VIBE_MODELS`, `CLI_PROVIDER_CLAUDE_MODELS`, `CLI_PROVIDER_<PROVIDER>_DEFAULT_MODEL` — override available models / default model per provider
+- `WEBUI_DISABLED_PROVIDERS` — comma-separated provider ids (`codex,opencode,vibe,claude`) to hide from the UI entirely (dashboard chips, new-session picker, login buttons); `isProviderEnabled()` in `services/cli-providers.ts` reads it at startup
 
 ## ComfyUI Image Generation (built-in)
 

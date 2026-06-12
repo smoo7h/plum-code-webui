@@ -9,6 +9,8 @@ import type { ApiResponse, CliProviderUpdateResponse } from '@claude-code-webui/
 import {
   CLI_PROVIDERS,
   getAvailableProviders,
+  getEnabledProviders,
+  isProviderEnabled,
   getCliModels,
   getModelDisplayLabels,
   getProviderCapabilities,
@@ -110,7 +112,7 @@ router.get('/', requireAuth, async (_req, res) => {
     const availableIds = new Set(availableProviders.map((p) => p.id));
 
     const labels = getModelDisplayLabels();
-    const providers = Object.values(CLI_PROVIDERS).map((provider) => {
+    const providers = getEnabledProviders().map((provider) => {
       const models = getCliModels(provider.id);
       const providerLabels: Record<string, string> = {};
       for (const m of models) {
@@ -172,6 +174,7 @@ router.get('/diagnostics', requireAuth, async (_req, res) => {
       return {
         id: provider.id,
         name: provider.name,
+        enabled: isProviderEnabled(provider.id),
         command: provider.command,
         binaryPath,
         installed: !!binaryPath,
@@ -253,7 +256,7 @@ router.post(
     const codexRefreshed = await refreshCodexModelsCache();
 
     const labels = getModelDisplayLabels();
-    const providers = Object.values(CLI_PROVIDERS).map((provider) => {
+    const providers = getEnabledProviders().map((provider) => {
       const models = getCliModels(provider.id);
       const providerLabels: Record<string, string> = {};
       for (const m of models) {

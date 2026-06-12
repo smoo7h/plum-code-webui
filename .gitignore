@@ -116,3 +116,4 @@ packages/android/*.apk
 packages/android/*.aab
 packages/android/test_*.png
 packages/android/ui_dump*.xml
+.serena/
