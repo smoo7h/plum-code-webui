@@ -273,7 +273,7 @@ export function SettingsPage() {
   const [showMcpForm, setShowMcpForm] = useState(false);
   const [showFolderBrowser, setShowFolderBrowser] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
-    return (localStorage.getItem('theme') as Theme) || 'system';
+    return (localStorage.getItem('theme') as Theme) || 'light';
   });
   const [newMcpServer, setNewMcpServer] = useState<{
     name: string;

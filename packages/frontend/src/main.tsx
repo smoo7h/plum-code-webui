@@ -9,7 +9,7 @@ import { applyProviderClass, getStoredUiProvider } from '@/lib/providers';
 // Initialize theme before render to prevent flash
 function initializeTheme() {
   const stored = localStorage.getItem('theme');
-  const theme = stored || 'system';
+  const theme = stored || 'light';
 
   document.documentElement.classList.remove('light', 'dark');
 
@@ -34,7 +34,7 @@ initializeProvider();
 // Listen for system theme changes
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
   const stored = localStorage.getItem('theme');
-  if (!stored || stored === 'system') {
+  if (stored === 'system') {
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(e.matches ? 'dark' : 'light');
   }
