@@ -751,11 +751,11 @@
   }
 
   /* Anthropic "Gradient Pro" - Purple to Blue */
-  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe) .gradient-pro {
+  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe):not(.provider-sevenwave) .gradient-pro {
     background: linear-gradient(135deg, #c377ff 0%, #2b75e2 100%);
   }
 
-  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe) .gradient-pro-text {
+  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe):not(.provider-sevenwave) .gradient-pro-text {
     background: linear-gradient(135deg, #c377ff 0%, #2b75e2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -763,7 +763,7 @@
   }
 
   /* Anthropic gradient border effect */
-  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe) .gradient-border::before {
+  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe):not(.provider-sevenwave) .gradient-border::before {
     background: linear-gradient(135deg, hsl(var(--anthropic-accent)) 0%, #c377ff 50%, #2b75e2 100%);
   }
 
@@ -773,7 +773,7 @@
   }
 
   /* Claude/Anthropic: dot pattern */
-  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe) .pattern-bg {
+  :root:not(.provider-plum):not(.provider-codex):not(.provider-vibe):not(.provider-sevenwave) .pattern-bg {
     background-image: radial-gradient(
       circle at 1px 1px,
       hsl(var(--pattern-color) / var(--pattern-opacity)) 1px,
@@ -1880,6 +1880,29 @@ html.dark .aurora-grain,
   --login-galaxy-b: 270 100% 75%;
   --login-galaxy-c: 216 74% 58%;
   --login-galaxy-d: 42 88% 56%;
+}
+
+/* 7th Wave: flat navy in place of two-tone gradients and provider-brand buttons */
+:root.provider-sevenwave .gradient-pro {
+  background: hsl(var(--primary));
+}
+
+:root.provider-sevenwave .gradient-pro-text,
+:root.provider-sevenwave .gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:root.provider-sevenwave .gradient-border::before {
+  background: hsl(var(--border));
+}
+
+:root.provider-sevenwave .provider-login-button {
+  --provider-button-a: 232 54% 36%;
+  --provider-button-b: 232 54% 30%;
+  --provider-button-c: 0 0% 100%;
 }
 
 .login-galaxy-band,
