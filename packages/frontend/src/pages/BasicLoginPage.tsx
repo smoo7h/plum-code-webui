@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { useBasicAuthStore } from '@/stores/basicAuthStore';
 import { useAuthStore } from '@/stores/authStore';
 import { ProviderLogo } from '@/components/branding/ProviderLogo';
-import { UI_PROVIDER_META } from '@/lib/providers';
 
 export function BasicLoginPage() {
   const navigate = useNavigate();
@@ -54,56 +53,16 @@ export function BasicLoginPage() {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center gap-10 px-6 py-12 lg:grid lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-6 text-center lg:text-left">
-          <div className="flex items-center justify-center gap-3 lg:justify-start">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card/80 shadow-lg ring-1 ring-border/60 backdrop-blur-sm">
-              <ProviderLogo provider="sevenwave" className="h-7 w-7" alt="Riptide" />
-            </div>
-            <div className="text-left">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-                Riptide
-              </p>
-              <p className="text-sm text-muted-foreground">AI workspace for CRM agent sessions</p>
-            </div>
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-8 px-6 py-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card/80 shadow-lg ring-1 ring-border/60 backdrop-blur-sm">
+            <ProviderLogo provider="sevenwave" className="h-7 w-7" alt="Riptide" />
           </div>
-
-          <div className="space-y-3">
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Orchestrate every CLI session from one workspace.
-            </h1>
-            <p className="text-base text-muted-foreground">
-              Manage sessions, switch providers, and keep context stitched together with a single
-              dashboard.
+          <div className="text-left">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
+              Riptide
             </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-            {(['claude', 'codex', 'opencode', 'vibe'] as const).map((provider) => (
-              <span key={provider} className="ui-pill ui-pill-subtle gap-2 backdrop-blur-sm">
-                <ProviderLogo provider={provider} className="h-4 w-4" alt="" />
-                <span className="text-xs font-medium">{UI_PROVIDER_META[provider].label}</span>
-              </span>
-            ))}
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-border/60 bg-card/70 p-4 shadow-sm backdrop-blur-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Session Handoff
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Switch providers without losing context or momentum.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border/60 bg-card/70 p-4 shadow-sm backdrop-blur-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Shared Skills
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Reuse agents, skills, and tools across every CLI.
-              </p>
-            </div>
+            <p className="text-sm text-muted-foreground">AI workspace for CRM agent sessions</p>
           </div>
         </div>
 
