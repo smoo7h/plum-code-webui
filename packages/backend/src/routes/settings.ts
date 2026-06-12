@@ -276,12 +276,12 @@ router.get('/', requireAuth, (req, res) => {
     // Create default settings
     db.prepare(
       `INSERT INTO user_settings (user_id, theme, allowed_tools)
-       VALUES (?, 'dark', '["Bash","Read","Write","Edit","Glob","Grep"]')`
+       VALUES (?, 'light', '["Bash","Read","Write","Edit","Glob","Grep"]')`
     ).run(userId);
 
     settings = {
       userId,
-      theme: 'dark',
+      theme: 'light',
       defaultWorkingDir: null,
       allowedTools: '["Bash","Read","Write","Edit","Glob","Grep"]',
       customSystemPrompt: null,
