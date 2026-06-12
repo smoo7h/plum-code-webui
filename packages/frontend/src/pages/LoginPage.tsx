@@ -110,8 +110,6 @@ export function LoginPage() {
   const [claudeLoginCode, setClaudeLoginCode] = useState('');
   const [claudeLoginWorking, setClaudeLoginWorking] = useState(false);
   const [claudeLoginOpened, setClaudeLoginOpened] = useState(false);
-  const [hoveredProvider, setHoveredProvider] = useState<string | null>(null);
-
   // Fetch available auth providers
   const { data: providers } = useQuery({
     queryKey: ['auth-providers'],
@@ -239,31 +237,18 @@ export function LoginPage() {
     providers?.vibe && 'vibe',
     providers?.claude && 'claude',
   ].filter(Boolean);
-  const loginGalaxyProvider = hoveredProvider || 'plum';
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
-      <div
-        className={cn(
-          'fixed inset-0 overflow-hidden pointer-events-none login-galaxy',
-          `login-galaxy-${loginGalaxyProvider}`
-        )}
-      >
-        <div className="login-galaxy-band login-galaxy-band-main" />
-        <div className="login-galaxy-band login-galaxy-band-cross" />
-        <div className="login-galaxy-haze" />
-      </div>
-
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex">
         {/* Left side - Branding */}
         <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 xl:p-16">
           <div>
             <div className="flex items-center gap-4 mb-16">
-              <img src="/logos/plum.png" alt="" className="h-12 w-12 object-contain" />
+              <ProviderLogo provider="sevenwave" className="h-12 w-12" alt="" />
               <div>
-                <h2 className="text-xl font-semibold tracking-tight">Plum Code</h2>
-                <p className="text-sm text-muted-foreground">WebUI</p>
+                <h2 className="text-xl font-semibold tracking-tight">Riptide</h2>
               </div>
             </div>
 
@@ -310,8 +295,8 @@ export function LoginPage() {
             {/* Mobile logo */}
             <div className="lg:hidden mb-10 text-center">
               <div className="inline-flex items-center gap-3 mb-4">
-                <img src="/logos/plum.png" alt="" className="h-10 w-10 object-contain" />
-                <h1 className="text-2xl font-bold tracking-tight">Plum Code</h1>
+                <ProviderLogo provider="sevenwave" className="h-10 w-10" alt="" />
+                <h1 className="text-2xl font-bold tracking-tight">Riptide</h1>
               </div>
               <p className="text-sm text-muted-foreground">Connect your CLI provider to continue</p>
             </div>
@@ -333,8 +318,6 @@ export function LoginPage() {
               {providers?.codex && (
                 <button
                   onClick={() => handleProviderLogin('codex')}
-                  onMouseEnter={() => setHoveredProvider('codex')}
-                  onMouseLeave={() => setHoveredProvider(null)}
                   className={cn(
                     'group relative w-full h-14 rounded-lg font-medium text-base transition-all duration-300',
                     'flex items-center justify-between px-5',
@@ -356,8 +339,6 @@ export function LoginPage() {
                 <div className="space-y-2">
                   <button
                     onClick={() => handleProviderLogin('opencode')}
-                    onMouseEnter={() => setHoveredProvider('opencode')}
-                    onMouseLeave={() => setHoveredProvider(null)}
                     className={cn(
                       'group relative w-full h-14 rounded-lg font-medium text-base transition-all duration-300',
                       'flex items-center justify-between px-5',
@@ -379,8 +360,6 @@ export function LoginPage() {
               {providers?.vibe && (
                 <button
                   onClick={() => handleProviderLogin('vibe')}
-                  onMouseEnter={() => setHoveredProvider('vibe')}
-                  onMouseLeave={() => setHoveredProvider(null)}
                   className={cn(
                     'group relative w-full h-14 rounded-lg font-medium text-base transition-all duration-300',
                     'flex items-center justify-between px-5',
@@ -405,8 +384,6 @@ export function LoginPage() {
                   </p>
                   <button
                     onClick={() => handleProviderLogin('claude')}
-                    onMouseEnter={() => setHoveredProvider('claude')}
-                    onMouseLeave={() => setHoveredProvider(null)}
                     className={cn(
                       'group relative w-full h-14 rounded-lg font-medium text-base transition-all duration-300',
                       'flex items-center justify-between px-5',
